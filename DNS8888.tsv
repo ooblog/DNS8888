@@ -27,7 +27,7 @@ capwait		1000
 
 [titlerewrite|
  - Mozilla Firefox	
- - ニコニコ動画:GINZA	_eco=1.mp4
+ - ニコニコ動画:GINZA	.mp4
 |titlerewrite]
 
 [DNSlist|
