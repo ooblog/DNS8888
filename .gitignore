@@ -60,3 +60,13 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# git push github:ooblog/DNS8888.git master
+# git log
+# git commit -a -m ""
+# git branch
+# git checkout master
+# git merge branch
+DNS8888_logo.apd
+DNS8888.sh
+

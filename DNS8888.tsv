@@ -1,0 +1,53 @@
+[L:Tsv|
+code	UTF-8
+enter	LF
+tab	8
+program	DNS8888.py
+LTsvver	20151005M161944
+modify	20151118W171821
+|L:Tsv]
+
+[DNS8888|
+fontname	kantray5x5comic
+fontsize	14
+txteditL	leafpad
+txteditW	notepad
+filerL		rox
+filerW		start
+playerW		mplayer2
+playerL		gnomemplayershell
+hostsL		/etc/hosts
+hostsW		c:¥windows¥system32¥drivers¥etc¥hosts
+tempL		/tmp/
+tempW		"C:\Documents and Settings\%username%\Local Settings\Temp"
+DNSresolv	/etc/resolv.conf
+captitle	 - Mozilla Firefox
+capwait		1000
+|DNS8888]
+
+[titlerewrite|
+ - Mozilla Firefox	
+ - ニコニコ動画:GINZA	_eco=1.mp4
+|titlerewrite]
+
+[DNSlist|
+Google1st	nameserver 8.8.8.8
+Google2nd	nameserver 8.8.4.4
+OpenDNS1st	# nameserver 208.67.222.222
+OpenDNS2nd	# nameserver 208.67.220.220
+|DNSlist]
+#Norton1st	# nameserver 199.85.126.10
+#Norton2nd	# nameserver 199.85.127.10
+#Comodo1st	# nameserver 8.26.56.26
+#Comodo2nd	# nameserver 8.20.247.20
+#Yandex1st	# nameserver 77.88.8.8
+#Yandex2nd	# nameserver 77.88.8.1
+#baidu1st	# nameserver 180.76.76.76
+#baidu2nd	# nameserver 114.114.114.114
+#OpenNIC	# nameserver 106.186.17.181
+#dnsmasq	# nameserver 127.0.0.1
+
+
+# Copyright (c) 2016 ooblog
+# License: MIT
+# https://github.com/ooblog/DNS8888/blob/master/LICENSE
