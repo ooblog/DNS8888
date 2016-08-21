@@ -11,25 +11,11 @@ DNSの変更はいわゆる自己責任なので万が一危険なサイトに�
 
 ## 操作方法。
 
-    ┏DNS8888 ━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃                   hosts「/etc/hosts」                  ┃
-    ┃｢                 leafpad /etc/hosts                   ｣┃
-    ┃        DNS「nameserver 8.8.8.8」>「/etc/resolv.conf」  ┃
-    ┃｢  8.8.8.8   ｣｢      leafpad /etc/resolv.conf          ｣┃
-    ┃    flash(「lsof -n | grep Flash」>「/tmp/debug0.mp4」  ┃
-    ┃｢ rox /tmp/  ｣｢ gnomemplayershell ｣｢ gnomemplayershell ｣┃
-    ┃                「 - Mozilla Firefox」                  ┃
-    ┃[6.2. re — 正規表現操作 — Python 3.5.1 ドキュメント    ]┃
-    ┃                                                        ┃
-    ┃                                                        ┃
-    ┃                                                        ┃
-    ┃                                                        ┃
-    ┃｢                 leafpad DNS8888.tsv                  ｣┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+![DNS8888](icon_cap/DNS8888_512.png "DNS8888")  
 
 「8.8.8.8」ボタンを押すと「/etc/resolv.conf」に「8.8.8.8」「8.8.4.4」が追加される。  
 ダイアルアップの度に「/etc/resolv.conf」は初期化されるのでその度にDNSの確認。  
-[DNS8888.tsv](DNS8888.tsv)にはGoogle以外のDNSもコメントアウトしてるが無保証です。
+[DNS8888.tsv](DNS8888.tsv)にはGoogle以外のDNSもコメントアウトの形で併記してますが無保証です。
 
 
 ## おまけ機能。

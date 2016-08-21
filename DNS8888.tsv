@@ -15,7 +15,7 @@ txteditW	notepad
 filerL		rox
 filerW		start
 playerW		mplayer2
-playerL		gnomemplayershell
+playerL		vlc
 hostsL		/etc/hosts
 hostsW		c:¥windows¥system32¥drivers¥etc¥hosts
 tempL		/tmp/
@@ -23,6 +23,7 @@ tempW		"C:\Documents and Settings\%username%\Local Settings\Temp"
 DNSresolv	/etc/resolv.conf
 captitle	 - Mozilla Firefox
 capwait		1000
+grepwait		5000
 |DNS8888]
 
 [titlerewrite|

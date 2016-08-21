@@ -19,7 +19,8 @@ DNS8888_congigpath,DNS8888_hostspath,DNS8888_resolvpath,DNS8888_temppath="DNS888
 DNS8888_ltsv,DNS8888_config,DNS8888_dnslist="","",""
 DNS8888_fontname,DNS8888_fontsize="kantray5x5comic",12; DNS8888_font="{0},{1}".format(DNS8888_fontname,DNS8888_fontsize)
 DNS8888_txtedit,DNS8888_filer,DNS8888_player="leafpad","rox","gnomemplayershell"
-DNS8888_capitle,DNS8888_capwait,DNS8888_rewrite=".*",10000," - Mozilla Firefox"
+DNS8888_capitle,DNS8888_capwait,DNS8888_rewrite=".*",1000," - Mozilla Firefox"
+DNS8888_grepwait=5000
 
 def DNS8888_dnsadd_kernel(window_objvoid=None,window_objptr=None):
     DNS8888_resolvlist=LTsv_loadfile(DNS8888_resolvpath)
@@ -39,24 +40,6 @@ def DNS8888_dnsexist_kernel():
        if "nameserver " in dns:
            DNS8888_dns_splitslen=DNS8888_dns_splitslen-1 if dns[dns.find("nameserver ")+len("nameserver "):] in DNS8888_resolvlist else DNS8888_dns_splitslen
     LTsv_widget_disableenable(DNS8888_button_dns,True if DNS8888_dns_splitslen > 0 else False)
-
-def DNS8888_grep_kernel():
-    DNS8888_combobox_number=LTsv_widget_getnumber(DNS8888_combobox_flash)
-    DNS8888_greplist=[]
-    DNS8888_lsof_input="lsof -n | grep Flash"
-    DNS8888_lsof_output=LTsv_subprocess(DNS8888_lsof_input,LTsv_subprocess_shell=True).rstrip('\n')
-    DNS8888_lsof_splits=DNS8888_lsof_output.rstrip('\n').split('\n') if len(DNS8888_lsof_output) > 0 else []
-    for LTsv_lsof in DNS8888_lsof_splits:
-        DNS8888_lsproc_input="ls -l /proc/{0}/fd | grep Flash".format(LTsv_pickdatanum(LTsv_lsof,0))
-        DNS8888_lsproc_output=LTsv_subprocess(DNS8888_lsproc_input,LTsv_subprocess_shell=True)
-        DNS8888_lsproc_splits=DNS8888_lsproc_output.rstrip('\n').split('\n') if len(DNS8888_lsproc_output) > 0 else []
-        for  LTsv_lsproc in DNS8888_lsproc_splits:
-            LTsv_fdproc=LTsv_lsproc[0:LTsv_lsproc.find(" ->")].rsplit(' ')[-1]
-            DNS8888_greplist.append("/proc/{0}/fd/{1}\n".format(LTsv_lsof.split('\t')[0],LTsv_fdproc))
-    DNS8888_greplist=sorted(set(DNS8888_greplist),key=DNS8888_greplist.index)
-    LTsv_combobox_list(DNS8888_combobox_flash,"".join(DNS8888_greplist))
-    LTsv_widget_setnumber(DNS8888_combobox_flash,DNS8888_combobox_number)
-    LTsv_widget_disableenable(DNS8888_button_play,True if len(LTsv_widget_gettext(DNS8888_combobox_flash)) > 0 else False)
 
 def DNS8888_play_kernel(window_objvoid=None,window_objptr=None):
     if len(LTsv_widget_gettext(DNS8888_combobox_flash)) > 0:
@@ -102,12 +85,32 @@ def DNS8888_window_gettitle(window_objvoid=None,window_objptr=None):
                 LTsv_widget_settext(DNS8888_entry_capitle,DNS8888_gettitle)
     LTsv_window_after(DNS8888_window,event_b=DNS8888_window_gettitle,event_i="DNS8888_window_gettitle",event_w=DNS8888_capwait)
 
+def DNS8888_grep_kernel(window_objvoid=None,window_objptr=None):
+    DNS8888_combobox_number=LTsv_widget_getnumber(DNS8888_combobox_flash)
+    DNS8888_greplist=[]
+    DNS8888_lsof_input="lsof -n | grep Flash"
+    DNS8888_lsof_output=LTsv_subprocess(DNS8888_lsof_input,LTsv_subprocess_shell=True).rstrip('\n')
+    DNS8888_lsof_splits=DNS8888_lsof_output.rstrip('\n').split('\n') if len(DNS8888_lsof_output) > 0 else []
+    for LTsv_lsof in DNS8888_lsof_splits:
+        DNS8888_lsproc_input="ls -l /proc/{0}/fd | grep Flash".format(LTsv_pickdatanum(LTsv_lsof,0))
+        DNS8888_lsproc_output=LTsv_subprocess(DNS8888_lsproc_input,LTsv_subprocess_shell=True)
+        DNS8888_lsproc_splits=DNS8888_lsproc_output.rstrip('\n').split('\n') if len(DNS8888_lsproc_output) > 0 else []
+        for  LTsv_lsproc in DNS8888_lsproc_splits:
+            LTsv_fdproc=LTsv_lsproc[0:LTsv_lsproc.find(" ->")].rsplit(' ')[-1]
+            DNS8888_greplist.append("/proc/{0}/fd/{1}\n".format(LTsv_lsof.split('\t')[0],LTsv_fdproc))
+    DNS8888_greplist=sorted(set(DNS8888_greplist),key=DNS8888_greplist.index)
+    LTsv_combobox_list(DNS8888_combobox_flash,"".join(DNS8888_greplist))
+    LTsv_widget_setnumber(DNS8888_combobox_flash,DNS8888_combobox_number)
+    LTsv_widget_disableenable(DNS8888_button_play,True if len(LTsv_widget_gettext(DNS8888_combobox_flash)) > 0 else False)
+    LTsv_window_after(DNS8888_window,event_b=DNS8888_grep_kernel,event_i="DNS8888_window_grep",event_w=DNS8888_grepwait)
+
 def DNS8888_configload(congigfile=DNS8888_congigpath):
     global DNS8888_congigpath,DNS8888_hostspath,DNS8888_resolvpath,DNS8888_temppath
     global DNS8888_ltsv,DNS8888_config,DNS8888_dnslist
     global DNS8888_fontname,DNS8888_fontsize
     global DNS8888_txtedit,DNS8888_filer,DNS8888_player
     global DNS8888_capitle,DNS8888_capwait,DNS8888_rewrite
+    global DNS8888_grepwait
     DNS8888_ltsv=LTsv_loadfile(congigfile)
     DNS8888_config=LTsv_getpage(DNS8888_ltsv,"DNS8888")
     DNS8888_fontname=LTsv_readlinerest(DNS8888_config,"fontname",DNS8888_fontname)
@@ -127,7 +130,8 @@ def DNS8888_configload(congigfile=DNS8888_congigpath):
         DNS8888_temppath=LTsv_readlinerest(DNS8888_config,"tempL",DNS8888_temppath)
     DNS8888_resolvpath=LTsv_readlinerest(DNS8888_config,"DNSresolv",DNS8888_resolvpath)
     DNS8888_capitle=LTsv_readlinerest(DNS8888_config,"captitle",DNS8888_capitle)
-    DNS8888_capwait=min(max(int(float(LTsv_readlinerest(DNS8888_config,"capwait",str(DNS8888_capwait)))),1000),60000)
+    DNS8888_capwait=min(max(LTsv_intstr0x(LTsv_readlinerest(DNS8888_config,"capwait",str(DNS8888_capwait))),1000),60000)
+    DNS8888_grepwait=min(max(LTsv_intstr0x(LTsv_readlinerest(DNS8888_config,"grepwait",str(DNS8888_capwait))),1000),60000)
     DNS8888_rewrite=LTsv_getpage(DNS8888_ltsv,"titlerewrite")
     DNS8888_dnslist=LTsv_getpage(DNS8888_ltsv,"DNSlist")
 
@@ -154,9 +158,9 @@ if len(LTsv_GUI) > 0:
         LTsv_widget_disableenable(DNS8888_button_open,False)
 #        LTsv_widget_disableenable(DNS8888_combobox_flash,False)
         LTsv_widget_disableenable(DNS8888_button_play,False)
-    LTsv_window_after(DNS8888_window,event_b=DNS8888_window_getID,event_i="DNS8888_window_getID",event_w=10)
     LTsv_widget_showhide(DNS8888_window,True)
     DNS8888_dnsexist_kernel()
+    LTsv_window_after(DNS8888_window,event_b=DNS8888_window_getID,event_i="DNS8888_window_getID",event_w=10)
     if sys.platform.startswith("linux"):
         DNS8888_grep_kernel()
     LTsv_window_main(DNS8888_window)
