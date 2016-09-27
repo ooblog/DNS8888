@@ -15,14 +15,20 @@ DNSの変更はいわゆる自己責任なので万が一危険なサイトに�
 
 「8.8.8.8」ボタンを押すと「/etc/resolv.conf」に「8.8.8.8」「8.8.4.4」が追加される。  
 ダイアルアップの度に「/etc/resolv.conf」は初期化されるのでその度にDNSの確認。  
-[DNS8888.tsv](DNS8888.tsv)にはGoogle以外のDNSもコメントアウトの形で併記してますが無保証です。
+[DNS8888.tsv](DNS8888.tsv)にはGoogle以外のDNSもコメントアウトの形で併記してますが無保証です。  
 
 
 ## おまけ機能。
 
 * 「/etc/hosts」の確認・編集。
 * ブラウザ上のFLVやMP4の再生を試みる実験。
-* 「Mozilla Firefox」のタイトル取得・文字列置換。
+* 「Mozilla Firefox」のタイトル取得・文字列置換。  
+
+
+## 「LTsv」フォルダについて。
+
+「LTsv」フォルダ内の「L&#58;Tsv」モジュールのドキュメント等は「[LTsv10kanedit](https://github.com/ooblog/LTsv10kanedit "LTsv10kanedit")」で入手。  
+「DNS8888」では「LTsv/kanchar.tsv」など漢直の辞書ファイルなどが省略されてます。  
 
 
 ## 動作環境。
